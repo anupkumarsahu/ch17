@@ -13,7 +13,7 @@
 		infrastructure -->
 
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
+	<annotation-driven validator="validator" />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
@@ -24,11 +24,9 @@
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 
-<!-- 	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" />
-		<beans:property name="suffix" value=".jspx" />
-	</beans:bean> -->
+	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<beans:property name="prefix" value="/WEB-INF/views/" /> <beans:property 
+		name="suffix" value=".jspx" /> </beans:bean> -->
 
 	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
 		id="tilesViewResolver">
@@ -46,7 +44,7 @@
 			</beans:list>
 		</beans:property>
 	</beans:bean>
-	
+
 	<context:component-scan base-package="com.apress.prospring3.ch17.web.controller" />
 
 	<interceptors>
@@ -68,5 +66,9 @@
 		id="themeSource"></beans:bean>
 	<beans:bean class="org.springframework.web.servlet.theme.CookieThemeResolver"
 		id="themeResolver" p:cookieName="theme" p:defaultThemeName="standard"></beans:bean>
+	<beans:bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<beans:property name="validationMessageSource" ref="messageSource" />
+	</beans:bean>
 
 </beans:beans>
